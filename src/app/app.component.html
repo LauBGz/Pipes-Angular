@@ -1,0 +1,137 @@
+<h1 class="mt-3">Pipes <small>Angular</small></h1>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Variable</th>
+                    <th>Pipe</th>
+                    <th>Salida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{nombre2}}</td>
+                    <td>capitalizado</td>
+                    <td>{{nombre2 | capitalizado}}</td>
+                </tr>
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>uppercase</td>
+                    <td>{{nombre | uppercase}}</td>
+                </tr>
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>lowercase</td>
+                    <td>{{nombre | lowercase}}</td>
+                </tr>
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>slice:3</td>
+                    <td>{{nombre | slice:3}}</td> 
+                    <!-- Corta las primeras 3 -->
+                </tr>
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>slice:0:3</td>
+                    <td>{{nombre | slice:0:3}}</td> 
+                    <!-- Corta de 0 a 3 -->
+                </tr>
+                <tr>
+                    <td>{{arreglo}}</td>
+                    <td>slice:1:5</td>
+                    <td>{{arreglo | slice:1:5}}</td> 
+                    <!-- Tb funciona con arrays.-->
+                </tr>
+                <tr>
+                     <!-- Decimal pipe-->
+                    <td>{{PI}}</td>
+                    <td>number</td>
+                    <td>{{PI | number:'.0-2'}}</td> 
+                    <!-- {{PI | number}	Ojo! El valor de la variable PI (3.141592653589793)
+                        no cambia, solo como se ve (3.142) 
+                        number:'1.0-0' 1 número entero sin decimales, es decir, 3
+                        number:'3.0-0' 3 cifras enteras (si no hay añade 0) 003 
+                        number:'.0-2' . sin nada es para que dé todos los enteros y 0-2 dos posiciones decimales-->
+                </tr>
+                <tr>
+                    <td>{{porcentaje}}</td>
+                    <td>percent</td>
+                    <td>{{porcentaje | percent}}</td> 
+                    <!--  porcentaje: number = 0.234; muestra 23%-->
+                </tr>
+                <tr>
+                    <td>{{porcentaje}}</td>
+                    <td>percent</td>
+                    <td>{{porcentaje | percent:'.2-2'}}</td> 
+                    <!-- muestra 2 posiciones decimales: 23.40%-->
+                </tr>
+                <tr>
+                    <td>{{salario}}</td>
+                    <td>currency</td>
+                    <td>{{salario | currency:"EUR"}}</td> 
+                    <!--{{salario | currency}} muestra $1,234.50 por defecto-->
+                    <!--{{salario | currency:"EUR"}} muestra €1,234.50-->
+                </tr>
+                <!--Async: espera a que el objeto responda y printa la información-->
+                <tr>
+                    <td>{{valorPromesa}}</td>
+                    <td>async</td>
+                    <td>{{valorPromesa | async}}</td> 
+                </tr>
+                <tr>
+                    <td>{{fecha}}</td>
+                    <td>date</td>
+                    <td>{{fecha | date: 'MMMM - d'}}</td> 
+                    <!-- <td>{{fecha | date}} muestra Jun 11, 2020</td>  -->
+                    <!-- <td>{{fecha | date: 'medium' muestra Jun 11, 2020, 5:14:40 PM}}</td>  -->
+                    <!-- <td>{{fecha | date: 'MMMM - d'}}</td> muestra June - 11   -->
+                </tr>
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>
+                        contrasena:{{activar}}
+                        <br>
+                        <button (click)="activar = !activar" class="btn btn-outline-primary">
+                            Activar/Desactivar
+                        </button>
+                    </td>
+                    <td>{{nombre | encriptar: activar}}</td> 
+                </tr>
+            </tbody>
+        </table>
+        <h4>Slice</h4>
+        <hr>
+        <ul>
+            <li *ngFor="let item of arreglo | slice:0:5">{{item}}</li>
+            <!-- Coge desde la primera posición (incluida) a la última (no incluida) -->
+        </ul>
+            <!-- JsonPipe: permite "printar" un objeto Javascript en el html -->
+        <h4>JSON</h4>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <!-- Pre: etiqueta de Bootstrap para mostrar objetos formateados -->
+                <pre>
+                    {{ heroe | json}}
+                </pre>
+            </div>
+        </div>
+        <h4>DOM Seguro</h4>
+        <hr class="mt-4">
+        <div class="row mb-5">
+            <div class="col">
+                <!-- src="https://www.youtube.com/embed/ytpQo4CNrdg"  -->
+                <iframe width="560" 
+                        height="315" 
+                        [src]="videoUrl | domseguro"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
